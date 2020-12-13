@@ -18,9 +18,13 @@ for( my $i=0; $i<@list; ++$i ) {
 
 # assumption: all bus loops are prime numbers
 # find the number of iteraions between two buses to get the right offset, then the number of interations of that to get the next
+
+# start is when this configuration of bus offsets first occurs
 my $start = 0;
-my $loop_size = 1;;
-my $x=0;
+# loop size is how many minutes until this configuration of bus offset recurs.
+my $loop_size = 1;
+
+my $total_loops=0;
 BUS: foreach my $bus ( @buses ) {
 	my $offset = $offs->{$bus};
 	if( !defined $loop_size ) {
@@ -50,10 +54,10 @@ BUS: foreach my $bus ( @buses ) {
 			next BUS;
 		}
 		$loops++;
-		$x++;
+		$total_loops++;
 	}
 }
-print "total loops = $x\n";
+print "total loops = $total_loops\n";
 print sprintf( "PART2 = %d\n", $start );
 exit;
 
