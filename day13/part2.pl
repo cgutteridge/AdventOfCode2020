@@ -39,10 +39,10 @@ BUS: foreach my $bus ( @buses ) {
 print sprintf( "PART2 = %d\n", $start );
 exit;
 
+# find x where (Ax+B)%C=0
 sub solveFunc {
 	my( $A, $B, $C ) = @_;
 
-	# (Ax+B)%C=0
 	for(my $x=0;$x<$C;$x++) {
 		return $x if ($A*$x+$B)%$C==0;
 	}
