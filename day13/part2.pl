@@ -24,7 +24,6 @@ my $start = 0;
 # loop size is how many minutes until this configuration of bus offset recurs.
 my $loop_size = 1;
 
-my $total_loops=0;
 BUS: foreach my $bus ( @buses ) {
 	my $offset = $offs->{$bus};
 	if( !defined $loop_size ) {
@@ -33,34 +32,22 @@ BUS: foreach my $bus ( @buses ) {
 		next BUS;
 	}
 
-	#print "$bus / $offset\n";
-	# how many times do we have to do this loop so that bus $bus is $offset minutes ahead?
-	my $loops = 0;
-	while(1) {
-		# starting at the offset right for all the buses previous to now,
-		#  try offsets from that that increment by the loop size (the product of all previous buses) 
-		#  the correct answer is when (that time + new bus required offset) % new bus loopsize == 0
-		my $time = $start + $loops * $loop_size;
-		# does the new bus leave $offset minutes after this?
-	#print "bus=$bus time=$time l=$l \n";
-		if( ($time+$offset) % $bus == 0 ) {
-			# yes (it's an interger number of times)
-			# to get to the same state for the other buses we have to do a loop the size of the sum of their primes. 
-			# and as they are all prime, it's just their sum, so repeat process for next bus starting at this time using
-			# the loop size of how often this state will recur (the new loop_size)
-			$loop_size = $loop_size*$bus;
-			$start = $time;
-			#print "$loops\n";
-			next BUS;
-		}
-		$loops++;
-		$total_loops++;
-	}
+	my $loops = solveFunc( $loop_size, $start+$offset, $bus );
+	$start = $start + $loops * $loop_size;
+	$loop_size = $loop_size * $bus;
 }
-print "total loops = $total_loops\n";
 print sprintf( "PART2 = %d\n", $start );
 exit;
 
+sub solveFunc {
+	my( $A, $B, $C ) = @_;
+
+	# (Ax+B)%C=0
+	for(my $x=0;$x<$C;$x++) {
+		return $x if ($A*$x+$B)%$C==0;
+	}
+	die "no solution";
+}
 
 sub readfile {
 	my( $filename ) = @_;
