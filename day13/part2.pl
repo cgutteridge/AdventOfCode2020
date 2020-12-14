@@ -42,6 +42,7 @@ exit;
 # find x where (Ax+B)%C=0
 sub solveFunc {
 	my( $A, $B, $C ) = @_;
+print "0=$A x X + $B % $C\n";
 
 	for(my $x=0;$x<$C;$x++) {
 		return $x if ($A*$x+$B)%$C==0;
