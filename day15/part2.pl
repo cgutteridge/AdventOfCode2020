@@ -33,7 +33,7 @@ for(my $i=scalar @n+1;$i<=$MAX;$i++) {
 	$oldnum = $num;
 }
 
-
+print "".(scalar keys %$last)."\n";
 print sprintf( "PART2 = %d\n", $num );
 exit;
 
