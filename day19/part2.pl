@@ -53,7 +53,7 @@ $rules->{11}=[
 [42,42,31,31],
 [42,42,42,31,31,31],
 [42,42,42,42,31,31,31,31],
-[42,42,42,42,42,42,42,42,42,42],
+[42,42,42,42,42,31,31,31,31,31],
 ];
 
 # v1 try to collapse rules
@@ -70,13 +70,6 @@ RULE: while( @remaining_rules ) {
 			}
 		}
 	}
-
-	#if( $rnum == 11 ) {
-		#print "RNUM=$rnum\n";
-		#print Dumper( $lists->{42} );
-		#print Dumper( $lists->{31} );
-		#die;
-	#}
 
 	my $allowed = {};
 	$lists->{$rnum} = {};	
@@ -114,11 +107,7 @@ print "Depth:$D\n";
 			$lists->{$rnum}->{$str} = 1;
 		}
 	}	
-	if( $rnum == 42 ) {
-		print Dumper( $lists->{$rnum} );
-	
-	}
-
+	#if( $rnum == 42 ) { print Dumper( $lists->{$rnum} ); }
 }
 #print Dumper( $lists );
 print "--\n";
