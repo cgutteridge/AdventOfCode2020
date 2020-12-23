@@ -34,12 +34,12 @@ my $start_t = time();
 my $last_t = time();
 while($move<=$MOVES) {
 	#print "\n";
-	if( ($move % 10000)==1) {
+	if( ($move % 100000)==1) {
 		my $taken = time()-$start_t;
 		my $seg = time()-$last_t;
 		$last_t = time();
 		my $permove = $taken/($move);
-		print sprintf( "MOVE %d - total %f, seg %f, permove %f, sec %i, hour %i \n", $move,$taken, $seg, $permove, $permove*$MOVES, $permove*$MOVES/60/60 );
+		print sprintf( "MOVE %d - total %f, seg %f, permove %f, sec %i, remain sec %i \n", $move,$taken, $seg, $permove, $permove*$MOVES, $permove*($MOVES-$move));
 	}
 	#report state
 	#drawlist( $first, $current );
