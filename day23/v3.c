@@ -24,16 +24,12 @@ int main() {
 		int grab = next[current];
 		next[current] = next[next[next[grab]]];
 		int dest_label = current-1;
-		if( dest_label == 0 ) {
-			dest_label = size;
-		}
+		if( dest_label == 0 ) { dest_label = size; }
 		while( dest_label==grab
 		    || dest_label==next[grab] 
 		    || dest_label==next[next[grab]] ) {
 			dest_label--;
-			if( dest_label == 0 ) {
-				dest_label = size;
-			}
+			if( dest_label == 0 ) { dest_label = size; }
 		}
 		int after_dest = next[dest_label];
 		next[dest_label] = grab;
